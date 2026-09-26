@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATOMY CHECK-UP</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-container">
+  
+  <header class="header">
+    <div class="header-top">
+      <button class="back-btn" id="back-btn" style="display: none;">←</button>
+      <div class="quiz-title-top">ATOMY CHECK-UP</div>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- ЭКРАН 1: Главный экран выбора направления -->
+    <div class="screen active" id="screen-1">
+      <h1 class="title">Чему сейчас нужно уделить больше внимания?</h1>
+      <p class="subtitle">Выберите одно направление</p>
+
+      <div class="cards-grid">
+        <button class="choice-card" onclick="selectCategory('face')">
+          <img src="img/крем.png" alt="Уход за лицом" class="card-img">
+          <div class="card-text">
+            <h3>Уход за лицом</h3>
+            <p>Хочется улучшить состояние кожи лица и вернуть свежий вид</p>
+          </div>
+        </button>
+
+        <button class="choice-card" onclick="selectCategory('hair')">
+          <img src="img/волосы.png" alt="Уход за волосами" class="card-img">
+          <div class="card-text">
+            <h3>Уход за волосами</h3>
+            <p>Нужно вернуть блеск, объем или справиться с сухостью</p>
+          </div>
+        </button>
+
+        <button class="choice-card" onclick="selectCategory('body')">
+          <img src="img/кожа.png" alt="Тело и руки" class="card-img">
+          <div class="card-text">
+            <h3>Тело и руки</h3>
+            <p>Хочется убрать сухость кожи и добавить комфорта после душа</p>
+          </div>
+        </button>
+
+        <button class="choice-card" onclick="selectCategory('health')">
+          <img src="img/организм.png" alt="Энергия и здоровье" class="card-img">
+          <div class="card-text">
+            <h3>Энергия и здоровье</h3>
+            <p>Не хватает сил, хочется поддержать организм изнутри</p>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ЭКРАН 2: Вопросы квиза -->
+    <div class="screen" id="screen-quiz">
+      <h2 class="title" id="quiz-title">Заголовок вопроса</h2>
+      <div class="options-container" id="options-container"></div>
+    </div>
+
+    <!-- ЭКРАН 3: Финальный результат -->
+    <div class="screen" id="screen-result">
+      <div class="result-card">
+        <div class="result-badge">Индивидуальный разбор готов!</div>
+        <h2 class="result-title" id="result-title">Загрузка результатов...</h2>
+        <p class="result-desc" id="result-desc">Описание вашего состояния...</p>
+        
+        <div class="products-list">
+          <h3>Рекомендуемый комплекс Atomy:</h3>
+          <p class="hint-text">(Нажмите на продукт, чтобы узнать подробнее и посмотреть фото)</p>
+          <div id="products-container" class="products-container"></div>
+        </div>
+
+        <div class="cta-box">
+          <div class="gift-tag"> ПОЛУЧИТЕ МАСКУ ДЛЯ ЛИЦА В ПОДАРОК!</div>
+          <p class="cta-subtitle">Твой индивидуальный подбор сформирован.</p>
+          <ol class="cta-steps">
+            <li>Сделай скриншот этого результата</li>
+            <li>Перейди в мой закрытый Telegram-канал</li>
+            <li>Отправь результат в ЛС или комментарии и забери в подарок <b>МАСКУ ДЛЯ ЛИЦА</b> <u> только к первому заказу!</u></li>
+          </ol>
+          <a href="https://t.me/+jZDhTRAoYto0ZmEy" target="_blank" class="tg-button">ПЕРЕЙТИ В TELEGRAM</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Модальное окно для детального просмотра продукта -->
+<div id="product-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div class="modal-img-wrapper">
+      <img id="modal-img" src="" alt="Продукт">
+    </div>
+    <h3 id="modal-title"></h3>
+    <div id="modal-price" class="modal-price"></div>
+    <p id="modal-desc"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
