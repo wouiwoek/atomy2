@@ -486,10 +486,11 @@ function showResult(key) {
         productsContainer.appendChild(item);
     });
 }
-
 // ==========================================
 // УПРАВЛЕНИЕ МОДАЛЬНЫМ ОКНОМ ПРОДУКТА
 // ==========================================
+
+// Функция открытия окна
 function openProductModal(product) {
     if (!modal) return;
     
@@ -500,16 +501,37 @@ function openProductModal(product) {
     modalImg.alt = product.name;
 
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Запрещаем скролл фона, пока открыто окно
 }
 
+// Единая функция закрытия окна
+function closeModal() {
+    if (!modal) return;
+    
+    modal.classList.remove('active');
+    modal.style.display = ''; // Сбрасываем инлайн-стили
+    document.body.style.overflow = ''; // Возвращаем скролл
+    document.body.style.pointerEvents = 'auto'; // Гарантируем кликабельность
+}
+
+// 1. Клике по встроенной кнопке закрытия (если она есть в HTML)
 if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
+    closeModalBtn.addEventListener('click', closeModal);
 }
 
-// Закрытие по клику вне модального окна
-window.addEventListener('click', (event) => {if (event.target === modal) {
-        modal.classList.remove('active');
+// 2. Клик по фону вокруг окна (оверлею)
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeModal();
     }
 });
+
+// 3. Перехват клика по нашему добавленному крестику (.modal-close-btn)
+document.addEventListener('click', function (event) {
+    const closeButton = event.target.closest('.modal-close-btn');
+    if (closeButton) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeModal();
+    }
+}, true);
